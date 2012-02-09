@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Last name:</b>
+  <%= @entry.last_name %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @entry.first_name %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @entry.event %>
+</p>
+
+<p>
+  <b>Lightweight:</b>
+  <%= @entry.lightweight %>
+</p>
+
+<p>
+  <b>Waiver:</b>
+  <%= @entry.waiver %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= @entry.age %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @entry.dob %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @entry.score %>
+</p>
+
+<p>
+  <b>Affiliation:</b>
+  <%= @entry.affiliation %>
+</p>
+
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>

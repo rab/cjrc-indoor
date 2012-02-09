@@ -1,0 +1,57 @@
+<h1>Listing entries</h1>
+
+<p>
+<%= link_to 'New Entry', new_entry_path %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Last name</th>
+      <th>First name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Seed Score</th>
+      <th>Affiliation</th>
+      <th>Event</th>
+      <th>Lightweight</th>
+      <th>Age</th>
+      <th>Dob</th>
+      <th>Responsible Party</th>
+      <th>Waiver</th>
+      <th>Registered</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| -%>
+      <tr>
+        <td><%= entry.last_name %></td>
+        <td><%= entry.first_name %></td>
+        <td><%= entry.address %></td>
+        <td><%= entry.phone %></td>
+        <td><%= entry.email %></td>
+        <td><%= entry.score %></td>
+        <td><%= entry.affiliation %></td>
+        <td><%= entry.event %></td>
+        <td><%= entry.lightweight? ? 'Yes' : 'No' %></td>
+        <td><%= entry.age %></td>
+        <td><%= entry.dob %></td>
+        <td><%= entry.responsible_party %></td>
+        <td><%= entry.waiver %></td>
+        <td><%= entry.registered_at %></td>
+        <td><%= link_to 'Show', entry %></td>
+        <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+        <td><%= link_to 'Destroy', entry, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<br />
+<p>
+<%= link_to 'New Entry', new_entry_path %>
+</p>

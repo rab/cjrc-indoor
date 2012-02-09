@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  last_name: MyString
+  first_name: MyString
+  event: 
+  lightweight: false
+  waiver: false
+  age: 1
+  dob: 2012-02-09
+  score: MyString
+  affiliation: MyString
+
+two:
+  last_name: MyString
+  first_name: MyString
+  event: 
+  lightweight: false
+  waiver: false
+  age: 1
+  dob: 2012-02-09
+  score: MyString
+  affiliation: MyString

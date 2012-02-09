@@ -1,0 +1,70 @@
+<%= form_for(@entry) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :score %><br />
+    <%= f.text_field :score %>
+  </div>
+  <div class="field">
+    <%= f.label :affiliation %><br />
+    <%= f.text_field :affiliation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :event_id, 'Event' %><br />
+    <%= f.select :event_id, @events, :include_blank => '-- Select Event --' %>
+  </div>
+  <div class="field">
+    <%= f.check_box :lightweight %>
+    <%= f.label :lightweight %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :dob, 'Date of Birth' %><br />
+    <%= f.date_select :dob, start_year: Date.today.year - 99, end_year: Date.today.year - 5 %>
+  </div>
+  <div class="field">
+    <%= f.label :responsible_party %><br />
+    <%= f.text_field :responsible_party %>
+  </div>
+  <div class="field">
+    <%= f.check_box :waiver %>
+    <%= f.label :waiver, "Signed Waiver?" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

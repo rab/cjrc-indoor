@@ -12,10 +12,14 @@
     <h1>CJRC Indoor Rowing Championship</h1>
   </div>
   <div class="clear"></div>
+  <h2>Select an option</h2>
 
   <%= flash_messages %>
 
-  <%= yield %>
-
+  <ul>
+    <li><%= link_to "Events", events_path %></li>
+    <li><%= link_to "Entries", entries_path %></li>
+  </ul>
+  <div id="footer">&nbsp;</div>
 </body>
 </html>

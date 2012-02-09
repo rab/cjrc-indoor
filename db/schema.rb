@@ -11,6 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20120209061644) do
+
+  create_table "entries", :force => true do |t|
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "score"
+    t.string   "affiliation"
+    t.integer  "event_id"
+    t.boolean  "lightweight",       :default => false, :null => false
+    t.integer  "age"
+    t.date     "dob"
+    t.string   "responsible_party"
+    t.boolean  "waiver",            :default => false, :null => false
+    t.datetime "registered_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entries", ["event_id"], :name => "index_entries_on_event_id"
+
+  create_table "events", :force => true do |t|
+    t.integer  "number"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
