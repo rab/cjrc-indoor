@@ -1,7 +1,11 @@
 CjrcIndoor::Application.routes.draw do
   root :to => 'home#index'
 
-  resources :entries
+  resources :entries do
+    collection {
+      post :import
+    }
+  end
   resources :events
 
   # The priority is based upon order of creation:

@@ -55,3 +55,16 @@
 <p>
 <%= link_to 'New Entry', new_entry_path %>
 </p>
+
+<%= form_tag(import_entries_path, multipart: true) do |f| -%>
+  <fieldset>
+    <legend>Upload many registrations</legend>
+    <div class="field">
+      <%= label :data, 'CSV File' %>
+      <%= file_field_tag :data %>
+    </div>
+    <div class="actions">
+      <%= submit_tag 'Upload' %>
+    </div>
+  </fieldset>
+<% end -%>

@@ -1,3 +1,5 @@
+require 'csv'
+
 class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
@@ -82,6 +84,48 @@ class EntriesController < ApplicationController
       format.html { redirect_to entries_url }
       format.json { head :ok }
     end
+  end
+
+  # POST /entries/import
+  def import
+    logger.unknown { params.inspect }
+    #headings:
+    # registered_at,full_name,address,phone,email,score,affiliation,event,lightweight,age,responsible_party,,,waiver_text,registered_on
+    csv = params[:data]
+    this_year = Date.today.year
+    counts = { good: 0, bad: 0 }
+    CSV.parse(csv.read, headers: true) do |row|
+      attrs = row.to_hash
+      event_name = attrs.delete('event')
+      full_name = attrs.delete('full_name')
+      event = Event.find_by_name event_name
+      entry = Entry.new(attrs.select{|k,v| %w[ registered_at address phone email score affiliation
+                                               event age responsible_party ].include?(k) }) {|_|
+        unless _.score.blank? || (match_data = /(?:(\d+):)?(\d+):(\d+)(?:\.(\d+))?/.match(_.score)).nil?
+          hours, minutes, seconds, tenths = match_data.captures
+          minutes, seconds, tenths = hours, minutes, seconds if hours.to_i.nonzero?
+          _.score = "%2d:%02d.%1d"%[minutes.to_s.to_i(10), seconds.to_s.to_i(10), tenths.to_s.to_i(10)]
+        end
+        _.first_name, _.last_name = full_name.split
+        _.event_id = event.id if event
+        _.dob ||= Date.new(this_year - _.age, 1, 1) if _.age.to_i.nonzero?
+        _.lightweight = case attrs['lightweight']
+                        when /^n/i, 0, '0', false, nil, ''
+                          false
+                        when /^y/i, 1, '1', true
+                          true
+                        end
+      }
+      if entry.save
+        counts[:good] += 1
+      else
+        counts[:bad]  += 1
+        logger.error { "Failed: #{entry.errors.full_messages.to_sentence}\n  #{row.inspect}" }
+      end
+    end
+    flash[:notice] = "#{counts[:good]} #{counts[:good] == 1 ? 'entry' : 'entries'} created" if counts[:good].nonzero?
+    flash[:error]  = "#{counts[:bad]} #{counts[:bad] == 1 ? 'entry' : 'entries'} had errors" if counts[:bad].nonzero?
+    redirect_to entries_path
   end
 
   private
