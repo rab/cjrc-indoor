@@ -5,6 +5,9 @@ CjrcIndoor::Application.routes.draw do
     collection {
       post :import
     }
+    member {
+      post :waiver
+    }
   end
   resources :events
 

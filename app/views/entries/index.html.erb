@@ -1,7 +1,15 @@
-<h1>Listing entries</h1>
+<h1>Listing entries <%= 'by Name' if params[:by_name] %></h1>
 
 <p>
-<%= link_to 'New Entry', new_entry_path %>
+  <% if params[:by_name] -%>
+    <%= link_to 'By event', entries_path %>
+  <% else -%>
+    <%= link_to 'By name', entries_path(by_name: true) %>
+  <% end -%>
+</p>
+
+<p>
+  <%= link_to 'New Entry', new_entry_path %>
 </p>
 
 <table>
@@ -17,7 +25,7 @@
       <th>Event</th>
       <th>Lightweight</th>
       <th>Age</th>
-      <th>Dob</th>
+      <th>DOB</th>
       <th>Responsible Party</th>
       <th>Waiver</th>
       <th>Registered</th>
@@ -28,24 +36,28 @@
   </thead>
   <tbody>
     <% @entries.each do |entry| -%>
-      <tr>
+      <tr id="<%= dom_id(entry) %>">
         <td><%= entry.last_name %></td>
         <td><%= entry.first_name %></td>
         <td><%= entry.address %></td>
         <td><%= entry.phone %></td>
         <td><%= entry.email %></td>
-        <td><%= entry.score %></td>
+        <td class="numeric"><%= entry.score %></td>
         <td><%= entry.affiliation %></td>
         <td><%= entry.event %></td>
         <td><%= entry.lightweight? ? 'Yes' : 'No' %></td>
-        <td><%= entry.age %></td>
+        <td class="numeric"><%= entry.age %></td>
         <td><%= entry.dob %></td>
         <td><%= entry.responsible_party %></td>
-        <td><%= entry.waiver %></td>
+        <td id="<%= dom_id(entry, 'waiver') %>">
+          <%= link_to(entry.waiver? ? 'Yes' : 'No', waiver_entry_path(entry), remote: true, method: :post) %>
+        </td>
         <td><%= entry.registered_at %></td>
         <td><%= link_to 'Show', entry %></td>
         <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-        <td><%= link_to 'Destroy', entry, confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= link_to('Destroy', entry, { method: :delete,
+                          confirm: ["Delete #{entry} permanently?", "There is no UNDO!",
+                                    'Are you sure?',].join("\n\n"), }) %></td>
       </tr>
     <% end -%>
   </tbody>

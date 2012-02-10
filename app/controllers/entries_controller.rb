@@ -4,7 +4,11 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.order('event_id, score').all
+    if params[:by_name]
+      @entries = Entry.order('last_name, first_name, score')
+    else
+      @entries = Entry.order('event_id, score')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -65,6 +69,23 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
+        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @entry.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # Only XHR?
+  # POST /entries/1/waiver
+  def waiver
+    @entry = Entry.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @entry && @entry.toggle!(:waiver)
+        format.js
         format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
         format.json { head :ok }
       else

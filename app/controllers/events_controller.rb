@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.order('number, name').all
+    @events = Event.joins('LEFT OUTER JOIN entries ON entries.event_id = events.id').
+      select('events.*, count(entries.id) AS entries_count').group('events.id').order('number, name').all
 
     respond_to do |format|
       format.html # index.html.erb

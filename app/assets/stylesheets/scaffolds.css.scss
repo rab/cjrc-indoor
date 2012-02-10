@@ -80,4 +80,8 @@ tbody {
   }
 }
 
+th.numeric, td.numeric {
+  text-align: right;
+}
+
 .clear { clear: both; }

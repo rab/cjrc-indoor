@@ -9,6 +9,7 @@
     <tr>
       <th>Number</th>
       <th>Name</th>
+      <th>Entries</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,9 +17,10 @@
   </thead>
   <tbody>
     <% @events.each do |event| -%>
-      <tr>
-        <td><%= event.number %></td>
+      <tr id="<%= dom_id(event) %>">
+        <td class="numeric"><%= event.number %></td>
         <td><%= event.name %></td>
+        <td class="numeric"><%= event.entries_count %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></td>
