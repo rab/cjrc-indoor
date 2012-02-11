@@ -1,0 +1,12 @@
+<% @seeds.each do |group,flights| -%>
+  <h2><%= group %> </h2>
+
+  <% flights.each.with_index(1) do |flight, number| -%>
+    <h3><%= number.ordinalize %> Flight</h3>
+    <ol>
+      <% flight.each.each.with_index(1) do |rower, erg| -%>
+        <li><%= (rower && rower.score).to_s.rjust(7).gsub(' ', '&nbsp;').html_safe %> <%= rower %> </li>
+      <% end -%>
+    </ol>
+  <% end -%>
+<% end -%>

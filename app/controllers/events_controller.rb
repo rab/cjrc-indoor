@@ -1,4 +1,9 @@
 class EventsController < ApplicationController
+
+  def seed
+    @seeds = Event.seed_all
+  end
+
   # GET /events
   # GET /events.json
   def index

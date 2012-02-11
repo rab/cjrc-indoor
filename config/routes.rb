@@ -13,7 +13,11 @@ CjrcIndoor::Application.routes.draw do
       post :waiver
     }
   end
-  resources :events
+  resources :events do
+    collection {
+      get :seed
+    }
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -16,10 +16,12 @@ class Event < ActiveRecord::Base
   end
 
   def self.seed_all
+    @seeds = []
     self.includes({ :entries => :event }).all.group_by(&:group).sort_by {|group,events|
       events.map(&:number).min
     }.each do |group,events|
-      puts group, '='*(group.size)
+      @seeds << [group,[]]
+      puts group, '='*(group.size) if $stdout.tty?
       entries_to_seed = events.map(&:entries).flatten.sort_by{|_| _.score.presence || '99:99.9'}
 
       flight_size = (entries_to_seed.size.to_f / ((entries_to_seed.size + 11) / 12)).ceil
@@ -29,10 +31,12 @@ class Event < ActiveRecord::Base
         flight.each.with_index(0) do |rower,flight_seed|
           ergs[seed_erg[flight_seed]-1] = rower
         end
+        @seeds[-1][-1] << ergs[1..-1]
         ergs[1..-1].each.with_index(1) do |rower, erg|
           puts "%2d: %s"%[erg, rower.to_s]
-        end
+        end if $stdout.tty?
       end
     end
+    @seeds
   end
 end
