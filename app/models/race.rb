@@ -10,6 +10,10 @@ class Race < ActiveRecord::Base
     Event.where(id: self.event_ids).order(:number)
   end
 
+  def to_s
+    "#{self.position} #{self.start_at.strftime('%H:%M')}"
+  end
+
   def self.as_options
     self.order('position, start_at').map {|_| [_.to_s, _.id] }
   end
