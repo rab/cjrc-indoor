@@ -1,0 +1,32 @@
+<h1>Listing assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Race</th>
+      <th>Entry</th>
+      <th>Erg</th>
+      <th>Score</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @assignments.each do |assignment| -%>
+      <tr>
+        <td><%= assignment.race %></td>
+        <td><%= assignment.entry %></td>
+        <td><%= assignment.erg %></td>
+        <td><%= assignment.score %></td>
+        <td><%= link_to 'Show', assignment %></td>
+        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
+        <td><%= link_to 'Destroy', assignment, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Assignment', new_assignment_path %>

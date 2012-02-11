@@ -65,10 +65,20 @@ div {
 
 .header {
   background-color: #069;
-  height: 100px;
+  height: 120px;
   color: white;
   padding-top: 40px;
   img { float: left; margin-top: -10px; }
+  ul {
+    list-style-type: none;
+    li {
+      display: inline;
+    margin-bottom: 5px;
+      a {
+        color: white;
+      }
+    }
+  }
 }
 
 tbody {

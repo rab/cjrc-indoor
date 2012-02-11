@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  number: 1
-  name: Novice Boys
+  race: one
+  entry: one
+  erg: 1
+  score: ~
 
 two:
-  number: 2
-  name: Novice Girls
+  race: one
+  entry: two
+  erg: 2
+  score: ~

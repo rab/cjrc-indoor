@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  number: 1
-  name: Novice Boys
+  position: 1
+  start_at: 2012-02-10 23:32:12
 
 two:
-  number: 2
-  name: Novice Girls
+  position: 2
+  start_at: 2012-02-10 23:32:12

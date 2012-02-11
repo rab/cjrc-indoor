@@ -42,7 +42,7 @@
 
   <div class="field">
     <%= f.label :event_id, 'Event' %><br />
-    <%= f.select :event_id, @events, :include_blank => '-- Select Event --' %>
+    <%= f.select :event_id, @events, include_blank: '-- Select Event --' %>
   </div>
   <div class="field">
     <%= f.check_box :lightweight %>

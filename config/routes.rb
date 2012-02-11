@@ -1,4 +1,8 @@
 CjrcIndoor::Application.routes.draw do
+  resources :assignments
+
+  resources :races
+
   root :to => 'home#index'
 
   resources :entries do

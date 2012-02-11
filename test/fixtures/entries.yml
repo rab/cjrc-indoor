@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  last_name: MyString
-  first_name: MyString
-  event: 
+  last_name: Smith
+  first_name: Mark
+  event: one
   lightweight: false
   waiver: false
-  age: 1
-  dob: 2012-02-09
-  score: MyString
-  affiliation: MyString
+  age: 16
+  dob: 1996-02-09
+  score: 6:55.0
+  affiliation: CJRC
 
 two:
-  last_name: MyString
-  first_name: MyString
-  event: 
+  last_name: Jones
+  first_name: Jennifer
+  event: two
   lightweight: false
   waiver: false
-  age: 1
-  dob: 2012-02-09
-  score: MyString
-  affiliation: MyString
+  age: 16
+  dob: 1996-02-09
+  score: 7:37.0
+  affiliation: CJRC

@@ -21,7 +21,7 @@ class EntriesControllerTest < ActionController::TestCase
       post :create, entry: @entry.attributes
     end
 
-    assert_redirected_to entry_path(assigns(:entry))
+    assert_redirected_to new_entry_path
   end
 
   test "should show entry" do
