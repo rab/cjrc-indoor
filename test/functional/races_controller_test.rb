@@ -21,7 +21,7 @@ class RacesControllerTest < ActionController::TestCase
       post :create, race: @race.attributes
     end
 
-    assert_redirected_to race_path(assigns(:race))
+    assert_redirected_to races_path
   end
 
   test "should show race" do

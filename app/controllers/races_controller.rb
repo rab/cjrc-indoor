@@ -2,7 +2,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all
+    @races = Race.order('position, start_at').all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,11 +40,15 @@ class RacesController < ApplicationController
   # POST /races
   # POST /races.json
   def create
+    if (display_start_at = params.delete('display_start_at'))
+      params[:start_at] = DateTime.parse(display_start_at)
+    end
+
     @race = Race.new(params[:race])
 
     respond_to do |format|
       if @race.save
-        format.html { redirect_to @race, notice: 'Race was successfully created.' }
+        format.html { redirect_to races_path, notice: "Race #{@race} was successfully created." }
         format.json { render json: @race, status: :created, location: @race }
       else
         format.html { render action: "new" }
@@ -56,6 +60,10 @@ class RacesController < ApplicationController
   # PUT /races/1
   # PUT /races/1.json
   def update
+    if (display_start_at = params.delete('display_start_at'))
+      params[:start_at] = DateTime.parse(display_start_at)
+    end
+
     @race = Race.find(params[:id])
 
     respond_to do |format|
