@@ -3,6 +3,10 @@ class Event < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def entries_count
+    self.entries.size
+  end
+
   def to_s
     "%2d: %s"%[self.number, self.name]
   end
