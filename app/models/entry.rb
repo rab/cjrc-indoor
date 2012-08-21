@@ -8,6 +8,14 @@ class Entry < ActiveRecord::Base
     self.assignment && self.assignment.race
   end
 
+  def group
+    self.event && self.event.group
+  end
+
+  def name
+    [self.last_name, self.first_name[0...1]].compact.join(', ')
+  end
+
   def to_s
     result = [self.last_name, self.first_name].compact.join(' ')
     result << " [#{self.event}]" if self.event

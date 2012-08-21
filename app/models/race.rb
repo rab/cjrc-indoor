@@ -3,7 +3,7 @@ class Race < ActiveRecord::Base
   has_many :entries, through: :assignments
 
   def event_ids
-    self.entries.map{|_|_.event_ids}.flatten.uniq
+    self.entries.map{|_|_.event_id}.flatten.uniq
   end
 
   def events
@@ -16,6 +16,18 @@ class Race < ActiveRecord::Base
     else
       1..12
     end
+  end
+
+  def boat_type
+    0           # team configuration (singles=0, doubles=1, fours=2, eights=3)
+  end
+
+  def boats
+    self.entries.count
+  end
+
+  def group
+    self.entries.detect{|_|_}.group
   end
 
   def display_start_at

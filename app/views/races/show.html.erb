@@ -1,14 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Position:</b>
-  <%= @race.position %>
+  <b>Race Number:</b> <%= @race.position %><br />
+  <b>Start at:</b> <%= @race.display_start_at %><br />
+  <b>Event<%= 's' unless @race.event_ids.size == 1 %>:</b>
+  <%= @race.event_ids.join(',') %> <br />
 </p>
 
-<p>
-  <b>Start at:</b>
-  <%= @race.start_at %>
-</p>
+<table>
+  <caption><%= @race.events.map{|_|_.name}.join(', ') %> </caption>
+  <thead>
+    <tr>
+      <% @race.ergs.each do |erg| -%>
+        <th><%= erg %> </th>
+      <% end -%>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @race.entries.each do |rower| -%>
+        <td>
+          <%= rower.last_name %> <br />
+          <%= rower.first_name %>
+        </td>
+      <% end -%>
+    </tr>
+  </tbody>
+</table>
 
 
 <%= link_to 'Edit', edit_race_path(@race) %> |

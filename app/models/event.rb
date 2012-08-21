@@ -27,12 +27,12 @@ class Event < ActiveRecord::Base
       flight_size = (entries_to_seed.size.to_f / ((entries_to_seed.size + 11) / 12)).ceil
       seed_erg = (1..12).fill_order
       entries_to_seed.each_slice(flight_size) do |flight|
-        ergs = Array(12+1)
+        ergs = Array.new(12)
         flight.each.with_index(0) do |rower,flight_seed|
           ergs[seed_erg[flight_seed]-1] = rower
         end
-        @seeds[-1][-1] << ergs[1..-1]
-        ergs[1..-1].each.with_index(1) do |rower, erg|
+        @seeds[-1][-1] << ergs
+        ergs.each.with_index(1) do |rower, erg|
           puts "%2d: %s"%[erg, rower.to_s]
         end if $stdout.tty?
       end

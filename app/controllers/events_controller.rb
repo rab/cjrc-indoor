@@ -2,6 +2,28 @@ class EventsController < ApplicationController
 
   def seed
     @seeds = Event.seed_all
+
+    @races = Race.all.to_a
+
+    @seeds.each do |group,flights|
+      group
+
+      flights.each.with_index(1) do |flight, number|
+        "#{number.ordinalize} Flight"
+
+        race = @races.shift
+
+        flight.each.each.with_index(1) do |rower, erg|
+          race.assignments.create({ entry_id: rower && rower.id,
+                                    erg: erg,
+                                  })
+        end
+
+        race_file = RaceFile.new(race)
+        race_file.to_file
+      end
+    end
+
   end
 
   # GET /events
