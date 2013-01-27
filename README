@@ -1,3 +1,10 @@
+This is an attempt to produce normal center-lanes-outward seeding for an
+Indoor Rowing event using Concept II Ergometers.
+
+The baisc documentation of a single race file is contained in the RaceFile model.
+
+====
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
