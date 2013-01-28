@@ -24,6 +24,8 @@ class Event < ActiveRecord::Base
       puts group, '='*(group.size) if $stdout.tty?
       entries_to_seed = events.map(&:entries).flatten.sort_by{|_| _.score.presence || '99:99.9'}
 
+      next if entries_to_seed.blank?
+
       flight_size = (entries_to_seed.size.to_f / ((entries_to_seed.size + 11) / 12)).ceil
       seed_erg = (1..12).fill_order
       entries_to_seed.each_slice(flight_size) do |flight|
