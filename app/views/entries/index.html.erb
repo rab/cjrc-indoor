@@ -65,12 +65,35 @@
 
 <br />
 <p>
-<%= link_to 'New Entry', new_entry_path %>
+  <%= link_to 'New Entry', new_entry_path %>
 </p>
 
 <%= form_tag(import_entries_path, multipart: true) do |f| -%>
   <fieldset>
     <legend>Upload many registrations</legend>
+    <table>
+      <caption>Expected Column Headings</caption>
+      <tbody>
+        <tr>
+          <td>registered_at</td>
+          <td>full_name</td>
+          <td>address</td>
+          <td>phone</td>
+          <td>email</td>
+          <td>score</td>
+          <td>affiliation</td>
+          <td>event</td>
+          <td>lightweight</td>
+          <td>age</td>
+          <td>responsible_party</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>waiver_text</td>
+          <td>registered_on</td>
+        </tr>
+      </tbody>
+    </table>
+
     <div class="field">
       <%= label :data, 'CSV File' %>
       <%= file_field_tag :data %>
